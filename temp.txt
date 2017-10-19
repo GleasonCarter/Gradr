@@ -1,0 +1,14 @@
+Quizzes
+q5:0.70
+Homeworks
+hw1:1.00
+Homeworks
+hw2:0.95
+Quizzes
+q1:1.00
+Quizzes
+q2:0.80
+Quizzes
+q3:0.70
+Exam 1
+e1:0.53

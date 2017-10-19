@@ -1,0 +1,7 @@
+-Operating Systems
+Homeworks:.32
+Projects:.2
+Quizzes:.08
+Exam 1:.1
+Exam 2:.1
+Final Exam:.2
