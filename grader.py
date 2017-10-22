@@ -1,5 +1,4 @@
 
-
 ## Imports
 import numpy
 import os
@@ -7,15 +6,27 @@ import os
 class Profile:
     def __init__(self, user):
         self.user_id = user
-        self.user_filename = self.find_file_for(user)
+        self.user_filename = "data_{}.txt".format(user)
+        self.user_data = None
         ## Dict of form {course name: syllabus filename}
         self.current_courses = {}
         ## Dict of form {course name: syllabus filename} TODO
         #self.past_courses = {}
+        self.load_user()
 
     ## Finds a file based on user name
-    def find_file_for(a_user):
-        
+    def find_file_for(self, target):
+        for r, d, files in os.walk("/userData"):
+            for name in files:
+                if name == target:
+                    return True
+        return False
+
+    ##
+    def load_user(self):
+        if not find_file_for(self.user_filename):
+            self.update_user()
+        else:
 
 ######
 ##  ##
@@ -58,25 +69,25 @@ class Course:
             print "-----------------------"
         else:
             infile = open(filename, "r")
-            current_catagory = ""
+            current_category = ""
             for line in infile:
                 line = line.rstrip("\n")
                 if line in self.categories:
-                    current_catagory = line
+                    current_category = line
                     continue
                 assignment, grade = line.split(":")
-                self.assignment_grades[current_catagory][assignment] = float(grade)
+                self.assignment_grades[current_category][assignment] = float(grade)
             infile.close()
 
     ##
     def update_avg(self):
-        for key in self.assignment_grades.keys():
+        for category in self.categories:
             temp_sum = 0
-            if (len(self.assignment_grades[key]) != 0):
-                for name in self.assignment_grades[key].keys():
-                    temp_sum += self.assignment_grades[key][name]
-                temp_sum = temp_sum/len(self.assignment_grades[key])
-                self.averages[key] = temp_sum
+            if (len(self.assignment_grades[category]) != 0):
+                for name in self.assignment_grades[category].keys():
+                    temp_sum += self.assignment_grades[category][name]
+                temp_sum = temp_sum/len(self.assignment_grades[category])
+                self.averages[category] = temp_sum
     ##
     def find_current_grade(self):
         self.update_avg()
@@ -104,18 +115,18 @@ class Course:
         print "Course name: {}".format(self.course_name)
         print "---------------------"
         print "Category's w/ weights"
-        for key in self.weights.keys():
-            print "{} : {:3.2f}".format(key, self.weights[key])
+        for category in self.categories:
+            print "{} : {:3.2f}".format(category, self.weights[category])
         print "------------------------"
         self.update_avg()
         print "Category score averages:"
-        for key in self.averages.keys():
-            print "{} : {:3.2f}".format(key, self.averages[key])
+        for category in self.categories:
+            print "{} : {:3.2f}".format(category, self.averages[category])
         print "-----------------------------"
         print "Stored assignments w/ grades:"
-        for key in self.assignment_grades.keys():
-            for name in self.assignment_grades[key].keys():
-                print "{} : {:3.2f}".format(name, self.assignment_grades[key][name])
+        for category in self.categories:
+            for name in self.assignment_grades[category].keys():
+                print "{} : {:3.2f}".format(name, self.assignment_grades[category][name])
         print "-------------"
         print "Current grade: {:3.2f}".format(self.find_current_grade())
         print "Maximum possible grade: {:3.2f}".format(self.find_max_grade())
