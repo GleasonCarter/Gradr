@@ -3,30 +3,40 @@
 import numpy
 import os
 
-class Profile:
-    def __init__(self, user):
-        self.user_id = user
-        self.user_filename = "data_{}.txt".format(user)
-        self.user_data = None
-        ## Dict of form {course name: syllabus filename}
-        self.current_courses = {}
-        ## Dict of form {course name: syllabus filename} TODO
-        #self.past_courses = {}
-        self.load_user()
-
-    ## Finds a file based on user name
-    def find_file_for(self, target):
-        for r, d, files in os.walk("/userData"):
-            for name in files:
-                if name == target:
-                    return True
-        return False
-
-    ##
-    def load_user(self):
-        if not find_file_for(self.user_filename):
-            self.update_user()
-        else:
+# class Profile:
+#     def __init__(self, user):
+#         self.user_id = user
+#         self.user_filename = "/userData/data_{}.txt".format(user)
+#         self.user_data = None
+#         ## Dict of form {course name: syllabus filename}
+#         self.current_courses = {}
+#         ## Dict of form {course name: syllabus filename} TODO
+#         #self.past_courses = {}
+#         self.load_user()
+#
+#     ## Finds a file based on user name
+#     def find_file_for(self, target):
+#         for r, d, files in os.walk("/userData"):
+#             for name in files:
+#                 if name == target:
+#                     return True
+#         return False
+#
+#     ##
+#     def load_user(self):
+#         if not find_file_for(self.user_filename):
+#             self.update_user() ## TODO
+#         else:
+#             infile = open(self.user_filename, "r")
+#             is_current = True
+#             for line in infile:
+#                 if line == "curren_courses":
+#                     is_current = True
+#                     continue
+#                 if is_current:
+#                     course, filename = line.split(":")
+#                     curren_courses[course] = filename
+#             close(infile)
 
 ######
 ##  ##
